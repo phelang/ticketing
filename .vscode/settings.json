@@ -4,6 +4,7 @@
     "depl",
     "kubectl",
     "kubernetes",
+    "middlewares",
     "signin",
     "signout",
     "signup",
