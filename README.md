@@ -1,2 +1,4 @@
-# ticketing
-Buying and selling tickets
+# Ticketing Web Application
+Buying and selling tickets 
+## Modules
+### auth
