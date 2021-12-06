@@ -1,10 +1,10 @@
 import { CustomError } from './custom-error'
 export class NotFoundError extends CustomError {
   statusCode = 404
-  reason = 'Request not found'
+  reason = 'URL request does not exist'
 
   constructor() {
-    super('Request not found')
+    super('URL request does not exist')
     Object.setPrototypeOf(this, NotFoundError.prototype)
   }
 

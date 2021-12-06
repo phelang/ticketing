@@ -1,55 +1,20 @@
 import express from 'express'
+import jwt from 'jsonwebtoken'
 
 const router = express.Router()
 
 router.get('/api/users/currentuser', (req, res) => {
-  function caesarCipher(s: string, k: number) {
-    const alphabet = [
-      'a',
-      'b',
-      'c',
-      'd',
-      'e',
-      'f',
-      'g',
-      'h',
-      'i',
-      'j',
-      'k',
-      'l',
-      'm',
-      'n',
-      'o',
-      'p',
-      'q',
-      'r',
-      's',
-      't',
-      'u',
-      'v',
-      'w',
-      'x',
-      'y',
-      'z',
-    ]
-
-    const cipher = s.split('').map((letter) => {
-      return alphabet.indexOf(letter.toLowerCase()) === -1
-        ? letter
-        : alphabet.indexOf(letter.toLowerCase()) + k > 26
-        ? alphabet[
-          alphabet.indexOf(letter.toLowerCase()) + k > 26! ?
-          alphabet.indexOf(letter.toLowerCase()) + k - 26 :
-          alphabet[alphabet.indexOf(letter.toLowerCase()) + k]
-        ]
-    })
-
-    console.log(cipher)
+  if (!req.session?.jwt) {
+    //  if(!req.session || !req.session.jwt)
+    return res.send({ currentUser: null })
   }
 
-  caesarCipher('middle-Outz', 2)
-
-  res.send('Hi Google Cloud Kubernetes Engine!')
+  try {
+    const payload = jwt.verify(req.session.jwt, process.env.JWT_KEY!)
+    return res.send({ currentUser: payload })
+  } catch (err) {
+    return res.send({ currentUser: null })
+  }
 })
 
 export { router as currentUserRouter }
