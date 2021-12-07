@@ -6,6 +6,13 @@
   "scripts": {
     "start": "ts-node-dev src/index.ts"
   },
+  "jest": {
+    "preset": "ts-test",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./src/test/setup.ts"
+    ]
+  },
   "dependencies": {
     "@types/cookie-session": "^2.0.43",
     "@types/express": "^4.17.13",
